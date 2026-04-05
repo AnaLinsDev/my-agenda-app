@@ -1,22 +1,34 @@
+import { useMemo } from "react";
 import { useActivitiesStore } from "../store/useActivitiesStore";
 
 export const useFilteredActivities = () => {
-  return useActivitiesStore((state) => {
-    const { activities, filters } = state;
+  const activities = useActivitiesStore((s) => s.activities);
+  const filters = useActivitiesStore((s) => s.filters);
 
-    return activities.filter((curr) => {
-      if (filters.category && curr.category !== filters.category) {
-        return false;
-      }
+  return useMemo(() => {
+    return activities
+      .filter((curr) => {
+        if (
+          filters.category &&
+          filters.category !== "all" &&
+          curr.category !== filters.category
+        ) {
+          return false;
+        }
 
-      if (
-        filters.completed !== undefined &&
-        curr.completed !== filters.completed
-      ) {
-        return false;
-      }
+        if (
+          filters.completed &&
+          filters.completed !== "all" &&
+          `${curr.completed}` !== filters.completed
+        ) {
+          return false;
+        }
 
-      return true;
-    });
-  });
+        return true;
+      })
+      .sort((a, b) => {
+        // 🔥 sort by time (HH:mm)
+        return a.time.localeCompare(b.time);
+      });
+  }, [activities, filters]);
 };

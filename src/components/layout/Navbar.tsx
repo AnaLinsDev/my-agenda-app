@@ -1,19 +1,29 @@
+import { useState } from "react";
 import { useCategories } from "../../hooks/useCategories";
+import { useActivities } from "../../hooks/useActivities";
+import { useActivitiesStore } from "../../store/useActivitiesStore";
+
 import Button from "../core/Button";
-import Input from "../core/Input";
 import Select from "../core/Select";
 import LanguageToggle from "../LanguageToggle";
 import ThemeToggle from "../ThemeToggle";
 import ModalAdd from "../modal/ModalAdd";
-import { useState } from "react";
+
 import type { FormDataModalAdd } from "../../zod/modal-add";
 
 export default function Navbar() {
   const { categories } = useCategories();
+  const { addActivity } = useActivities();
+  const setFilters = useActivitiesStore((s) => s.setFilters);
+
   const [open, setOpen] = useState(false);
 
-  const handleCreate = (data: FormDataModalAdd) => {
-    console.log("FORM DATA:", data);
+  // ✅ controlled states
+  const [category, setCategory] = useState<string>("all");
+  const [completed, setCompleted] = useState<string>("all");
+
+  const handleCreate = async (data: FormDataModalAdd) => {
+    await addActivity(data);
     setOpen(false);
   };
 
@@ -21,23 +31,46 @@ export default function Navbar() {
     <div className="flex flex-col-reverse gap-6 py-6 md:flex-row md:items-end md:justify-between">
       {/* LEFT SIDE */}
       <div className="flex flex-col gap-4 md:flex-row md:items-end">
-        {/* Filters */}
         <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap md:mr-6">
+          {/* CATEGORY */}
           <Select
             label="Categoria"
-            options={categories.map((cat) => ({
-              label: cat.id,
-              value: cat.id,
-            }))}
+            options={[
+              { label: "All", value: "all" },
+              ...categories.map((cat) => ({
+                label: cat.id,
+                value: cat.id,
+              })),
+            ]}
+            value={category}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCategory(value);
+
+              setFilters({
+                category: value,
+              });
+            }}
           />
 
-          <Input label="Start" type="date" />
-          <Input label="End" type="date" />
-        </div>
+          {/* COMPLETED */}
+          <Select
+            label="Completed"
+            options={[
+              { label: "All", value: "all" },
+              { label: "True", value: "true" },
+              { label: "False", value: "false" },
+            ]}
+            value={completed}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCompleted(value);
 
-        {/* Button */}
-        <div className="flex justify-center md:justify-start">
-          <Button title="Filtrar" variant="secondary" />
+              setFilters({
+                completed: value,
+              });
+            }}
+          />
         </div>
       </div>
 

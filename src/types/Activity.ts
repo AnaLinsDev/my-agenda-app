@@ -1,9 +1,11 @@
 export type Activity = {
   id: string;
+  
   title: string;
-  description: string;
   date: string;
   time: string;
+
+  frequence: "today" | "week" | "weekend";
   category:  "personal" | "work" | "study" | "health" | "others";
   completed: boolean;
   createdAt: string;

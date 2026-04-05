@@ -42,14 +42,6 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
             {...register("title")}
           />
 
-          {/* Description */}
-          <Input
-            label="Description"
-            placeholder="Optional"
-            errorMessage={errors.description?.message}
-            {...register("description")}
-          />
-
           {/* Date */}
           <Input
             type="date"
@@ -78,7 +70,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
             {...register("category")}
           />
 
-          {/* Filter */}
+          {/* Frequence */}
           <Select
             label="Visibility"
             options={[
@@ -86,10 +78,8 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
               { label: "All week", value: "week" },
               { label: "Week + Weekend", value: "weekend" },
             ]}
-            {...register("filter")}
+            {...register("frequence")}
           />
-
-          <div></div>
 
           {/* Buttons */}
           <div className="flex justify-end gap-2 mt-4">

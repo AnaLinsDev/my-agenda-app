@@ -4,7 +4,7 @@ import { startOfWeek, endOfWeek, format } from "date-fns";
 
 type Filters = {
   category?: string;
-  completed?: boolean;
+  completed?: string;
 
   startDate?: string; // YYYY-MM-DD
   endDate?: string; // YYYY-MM-DD
