@@ -4,7 +4,7 @@ export type Activity = {
   description: string;
   date: string;
   time: string;
-  category: string;
+  category:  "personal" | "work" | "study" | "health" | "others";
   completed: boolean;
   createdAt: string;
 };

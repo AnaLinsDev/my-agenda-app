@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import Button from "./core/Button";
 
 export default function LanguageToggle() {
   const { i18n } = useTranslation();
@@ -10,11 +11,10 @@ export default function LanguageToggle() {
   };
 
   return (
-    <button
+    <Button
+      variant="ghost"
+      title={`🌍 ${i18n.language.toUpperCase()}`}
       onClick={toggleLanguage}
-      className="px-4 py-2 rounded-lg bg-accent text-white"
-    >
-      🌍 {i18n.language.toUpperCase()}
-    </button>
+    />
   );
 }

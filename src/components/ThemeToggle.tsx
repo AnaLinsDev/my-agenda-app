@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "./core/Button";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(() => {
@@ -19,11 +20,12 @@ export default function ThemeToggle() {
   }, [isDark]);
 
   return (
-    <button
-      onClick={() => setIsDark((prev) => !prev)}
-      className="px-4 py-2 rounded-lg bg-accent text-white shadow-custom hover:opacity-80"
-    >
-      {isDark ? "🌙 Dark" : "☀️ Light"}
-    </button>
+    <Button
+      variant="ghost"
+      title={isDark ? "🌙" : "☀️"}
+      onClick={() => {
+        setIsDark((prev) => !prev);
+      }}
+    />
   );
 }
