@@ -8,6 +8,7 @@ import Select from "../core/Select";
 import Button from "../core/Button";
 import { schema, type FormDataModalAdd } from "../../zod/modal-add";
 import type { Category } from "../../types/Category";
+import { categoryStyles } from "../../utils/category-styles";
 
 type Props = {
   onClose: () => void;
@@ -19,10 +20,17 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormDataModalAdd>({
     resolver: zodResolver(schema),
   });
+
+  const selectedCategory = watch("category");
+
+  const categoryStyle =
+    selectedCategory &&
+    categoryStyles[selectedCategory as keyof typeof categoryStyles];
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
@@ -67,22 +75,14 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
               label: cat.id,
               value: cat.id,
             }))}
+            className={categoryStyle ? `${categoryStyle.bg} text-text-h` : ""}
             {...register("category")}
           />
 
-          {/* Frequence */}
-          <Select
-            label="Visibility"
-            options={[
-              { label: "Only today", value: "today" },
-              { label: "All week", value: "week" },
-              { label: "Week + Weekend", value: "weekend" },
-            ]}
-            {...register("frequence")}
-          />
+          <div></div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-2 mt-4">
+          <div className="col-span-2 flex justify-end gap-2 mt-4">
             <Button
               title="Cancel"
               type="button"

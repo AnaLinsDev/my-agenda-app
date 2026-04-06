@@ -5,7 +5,6 @@ export type Activity = {
   date: string;
   time: string;
 
-  frequence: "today" | "week" | "weekend";
   category:  "personal" | "work" | "study" | "health" | "others";
   completed: boolean;
   createdAt: string;

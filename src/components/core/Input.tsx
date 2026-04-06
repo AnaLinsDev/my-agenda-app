@@ -36,7 +36,7 @@ export default function Input({
       <label>{label}</label>
       <input
         className={clsx(
-          "w-full rounded-xl bg-white outline-none transition placeholder:text-text disabled:opacity-50",
+          "w-full rounded-xl bg-whitesmoke outline-none transition placeholder:text-text disabled:opacity-50",
           variants[variant],
           sizes[sizeInput],
           className,

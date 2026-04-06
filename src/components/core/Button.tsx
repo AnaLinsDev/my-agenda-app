@@ -11,14 +11,14 @@ const variants = {
   primary: "bg-[var(--accent)] text-white hover:opacity-90",
   secondary: "bg-[var(--border)] text-[var(--text-h)] hover:bg-opacity-80",
   ghost: "bg-transparent text-[var(--text-h)] hover:bg-[var(--accent-bg)]",
-  danger: "bg-red-500 text-white hover:bg-red-600",
+  danger: "bg-[var(--error)] text-white hover:bg-red-600",
 
   outlined:
     "bg-transparent border border-[var(--dark)] text-[var(--dark)] hover:bg-[var(--accent-bg)]",
 };
 
 const sizes = {
-  sm: "px-3 py-1.5 text-sm",
+  sm: "px-2 py-0.5 text-sm",
   md: "px-4 py-2 text-sm",
   lg: "px-5 py-3 text-base",
 };
@@ -36,7 +36,7 @@ export default function Button({
         "rounded-xl font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
-        className
+        className,
       )}
       {...props}
     >

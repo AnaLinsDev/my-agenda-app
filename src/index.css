@@ -57,11 +57,12 @@
   --accent-border: rgba(192, 132, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
 
-  --card: #575a5f;
+  --whitesmoke: whitesmoke;
+  --card: #1c1c1c;
   --error: #932d2d;
 
   --personal: #3b82f6;
-  --work: #f59e0b;
+  --work: #df8d00;
   --study: #10b981;
   --health: #ef4444;
   --others: #6b7280;
@@ -87,6 +88,7 @@
 
   --color-social-bg: var(--social-bg);
 
+  --color-whitesmoke: var(--whitesmoke);
   --color-card: var(--card);
   --color-error: var(--error);
   --color-dark: var(--dark);

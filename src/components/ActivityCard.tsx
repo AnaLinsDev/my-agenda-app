@@ -50,12 +50,12 @@ export default function ActivityCard({
 
   return (
     <div
-      className={`m-4 p-3 max-w-240 text-text-h rounded-xl ${
+      className={`my-2 p-3 max-w-240 text-text-h  ${
         categoryStyles[category].bg
       }`}
     >
       <div
-        className={`flex flex-col gap-3 mb-10 ${
+        className={`flex flex-col gap-1 mb-2 ${
           completed ? "opacity-60 line-through" : ""
         }`}
       >
@@ -71,47 +71,52 @@ export default function ActivityCard({
           />
         ) : (
           <h1
-            className="break-words cursor-pointer"
+            className="wrap-break-word cursor-pointer"
             onClick={() => setIsEditingTitle(true)}
           >
             {title}
           </h1>
         )}
 
-        {/* DATE */}
-        {isEditingDate ? (
-          <input
-            className="bg-transparent border-b outline-none w-fit"
-            type="date"
-            value={newDate}
-            onChange={(e) => setNewDate(e.target.value)}
-            onBlur={handleSave}
-            onKeyDown={(e) => e.key === "Enter" && handleSave()}
-          />
-        ) : (
-          <p
-            className="cursor-pointer text-sm opacity-80"
-            onClick={() => setIsEditingDate(true)}
-          >
-            {`${newDate.split("-")[1]}/${newDate.split("-")[2]}`}
-          </p>
-        )}
+        <div className="flex flex-row justify-between my-2">
+          {/* DATE */}
+          {isEditingDate ? (
+            <input
+              className=" border-b outline-none w-fit bg-black"
+              type="date"
+              value={newDate}
+              onChange={(e) => setNewDate(e.target.value)}
+              onBlur={handleSave}
+              onKeyDown={(e) => e.key === "Enter" && handleSave()}
+            />
+          ) : (
+            <p
+              className="cursor-pointer text-sm"
+              onClick={() => setIsEditingDate(true)}
+            >
+              {`${newDate.split("-")[1]}/${newDate.split("-")[2]}`}
+            </p>
+          )}
 
-        {/* TIME */}
-        {isEditingTime ? (
-          <input
-            className="bg-transparent border-b outline-none w-fit"
-            value={newTime}
-            type="time"
-            onChange={(e) => setNewTime(e.target.value)}
-            onBlur={handleSave}
-            onKeyDown={(e) => e.key === "Enter" && handleSave()}
-          />
-        ) : (
-          <p className="cursor-pointer" onClick={() => setIsEditingTime(true)}>
-            {time}
-          </p>
-        )}
+          {/* TIME */}
+          {isEditingTime ? (
+            <input
+              className="bg-transparent border-b outline-none w-fit"
+              value={newTime}
+              type="time"
+              onChange={(e) => setNewTime(e.target.value)}
+              onBlur={handleSave}
+              onKeyDown={(e) => e.key === "Enter" && handleSave()}
+            />
+          ) : (
+            <p
+              className="cursor-pointer text-sm"
+              onClick={() => setIsEditingTime(true)}
+            >
+              {time}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="flex justify-between">

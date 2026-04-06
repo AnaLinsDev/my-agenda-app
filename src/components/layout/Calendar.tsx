@@ -55,12 +55,10 @@ export default function Calendar() {
 
   return (
     <div className="flex-1">
-      <div className="flex justify-between items-center px-4 mt-4">
+      <div className="flex justify-end items-center px-4 ">
         <button onClick={() => setWeekOffset((prev) => prev - 1)}>
           <MdOutlineKeyboardArrowLeft size={36} />
         </button>
-
-        <span></span>
 
         <button onClick={() => setWeekOffset((prev) => prev + 1)}>
           <MdKeyboardArrowRight size={36} />
@@ -69,12 +67,12 @@ export default function Calendar() {
 
       <div className="grid lg:grid-cols-3 2xl:grid-cols-7">
         {week.map((w, index) => (
-          <div key={w.id} className="mx-1 bg-card rounded-2xl my-6">
-            <h2 className="text-center font-bold bg-bg border border-b-0 p-2 rounded-t-2xl">
+          <div key={w.id} className="bg-card mb-6">
+            <h2 className="text-center font-bold p-2">
               {w.name} - {formatDate(weekDates[index])}
             </h2>
 
-            <div className="h-[calc(100vh-300px)] overflow-y-scroll border border-t-0">
+            <div className="h-[calc(100vh-235px)] overflow-y-scroll">
               {activities
                 .filter((a) => {
                   const activityDate = parseLocalDate(a.date);
