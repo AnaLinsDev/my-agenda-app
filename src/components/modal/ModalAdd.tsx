@@ -46,7 +46,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
           {/* Title */}
           <Input
             label={t("card.title")}
-            placeholder="Activity title"
+            placeholder={t("card.title")}
             errorMessage={errors.title?.message}
             variant={errors.title ? "error" : "default"}
             {...register("title")}
