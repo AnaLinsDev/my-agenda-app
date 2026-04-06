@@ -10,6 +10,7 @@ import ThemeToggle from "../ThemeToggle";
 import ModalAdd from "../modal/ModalAdd";
 
 import type { FormDataModalAdd } from "../../zod/modal-add";
+import { categoryStyles } from "../../utils/category-styles";
 
 export default function Navbar() {
   const { categories } = useCategories();
@@ -43,6 +44,11 @@ export default function Navbar() {
               })),
             ]}
             value={category}
+            className={
+              category in categoryStyles
+                ? `${categoryStyles[category as keyof typeof categoryStyles].bg} text-text-h`
+                : ""
+            }
             onChange={(e) => {
               const value = e.target.value;
               setCategory(value);

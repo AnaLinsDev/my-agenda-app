@@ -1,4 +1,7 @@
   export const categoryStyles = {
+    all: {
+      bg: "bg-bg",
+    },
     personal: {
       bg: "bg-[var(--personal)]",
     },

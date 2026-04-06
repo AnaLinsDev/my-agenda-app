@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 type Props = {
   title: string;
-  variant?: "primary" | "secondary" | "ghost" | "danger";
+  variant?: "primary" | "secondary" | "ghost" | "danger" | "outlined";
   size?: "sm" | "md" | "lg";
   className?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -12,6 +12,9 @@ const variants = {
   secondary: "bg-[var(--border)] text-[var(--text-h)] hover:bg-opacity-80",
   ghost: "bg-transparent text-[var(--text-h)] hover:bg-[var(--accent-bg)]",
   danger: "bg-red-500 text-white hover:bg-red-600",
+
+  outlined:
+    "bg-transparent border border-[var(--dark)] text-[var(--dark)] hover:bg-[var(--accent-bg)]",
 };
 
 const sizes = {
@@ -33,7 +36,7 @@ export default function Button({
         "rounded-xl font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
-        className,
+        className
       )}
       {...props}
     >

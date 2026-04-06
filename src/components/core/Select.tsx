@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { categoryStyles } from "../../utils/category-styles";
 
 type Option = {
   label: string;
@@ -42,7 +43,7 @@ export default function Select({
 
       <select
         className={clsx(
-          "w-full rounded-xl bg-white outline-none transition disabled:opacity-50 pr-10",
+          "w-full rounded-xl outline-none transition disabled:opacity-50 pr-10",
           variants[variant],
           sizes[sizeInput],
           className,
@@ -50,7 +51,16 @@ export default function Select({
         {...props}
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option
+            key={opt.value}
+            value={opt.value}
+            className={clsx(
+              "text-text-h",
+              opt.value in categoryStyles
+                ? categoryStyles[opt.value as keyof typeof categoryStyles].bg
+                : categoryStyles.all.bg,
+            )}
+          >
             {opt.label}
           </option>
         ))}

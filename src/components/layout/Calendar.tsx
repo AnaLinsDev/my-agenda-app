@@ -74,7 +74,7 @@ export default function Calendar() {
               {w.name} - {formatDate(weekDates[index])}
             </h2>
 
-            <div className="min-h-[calc(100vh-300px)]">
+            <div className="h-[calc(100vh-300px)] overflow-y-scroll border border-t-0">
               {activities
                 .filter((a) => {
                   const activityDate = parseLocalDate(a.date);
@@ -94,6 +94,7 @@ export default function Calendar() {
                     category={a.category}
                     date={a.date}
                     time={a.time}
+                    completed={a.completed}
                   />
                 ))}
             </div>
