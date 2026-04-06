@@ -9,6 +9,7 @@ import Button from "../core/Button";
 import { schema, type FormDataModalAdd } from "../../zod/modal-add";
 import type { Category } from "../../types/Category";
 import { categoryStyles } from "../../utils/category-styles";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: () => void;
@@ -26,6 +27,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
     resolver: zodResolver(schema),
   });
 
+  const { t } = useTranslation();
   const selectedCategory = watch("category");
 
   const categoryStyle =
@@ -35,7 +37,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
       <div className="w-full max-w-lg rounded-2xl bg-bg p-6 shadow-xl">
-        <h2 className="text-lg font-semibold mb-4">Add Activity</h2>
+        <h2 className="text-lg font-semibold mb-4">{t("card.addActivity")}</h2>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -43,7 +45,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
         >
           {/* Title */}
           <Input
-            label="Title"
+            label={t("card.title")}
             placeholder="Activity title"
             errorMessage={errors.title?.message}
             variant={errors.title ? "error" : "default"}
@@ -53,7 +55,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
           {/* Date */}
           <Input
             type="date"
-            label="Date"
+            label={t("card.date")}
             variant={errors.date ? "error" : "default"}
             errorMessage={errors.date?.message}
             {...register("date")}
@@ -62,7 +64,7 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
           {/* Time */}
           <Input
             type="time"
-            label="Time"
+            label={t("card.time")}
             variant={errors.time ? "error" : "default"}
             errorMessage={errors.time?.message}
             {...register("time")}
@@ -70,9 +72,9 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
 
           {/* Category */}
           <Select
-            label="Category"
+            label={t("card.category")}
             options={categories.map((cat) => ({
-              label: cat.id,
+              label: t(`categoryList.${cat.id}`),
               value: cat.id,
             }))}
             className={categoryStyle ? `${categoryStyle.bg} text-text-h` : ""}
@@ -84,13 +86,13 @@ export default function ModalAdd({ onClose, onSubmit, categories }: Props) {
           {/* Buttons */}
           <div className="col-span-2 flex justify-end gap-2 mt-4">
             <Button
-              title="Cancel"
+              title={t("card.buttons.cancel")}
               type="button"
               variant="ghost"
               onClick={onClose}
             />
 
-            <Button title="Create" type="submit" />
+            <Button title={t("card.buttons.create")} type="submit" />
           </div>
         </form>
       </div>

@@ -1,7 +1,41 @@
 {
-  "welcome": "Bem-vindo",
-  "addActivity": "Adicionar atividade",
-  "title": "Título",
   "category": "Categoria",
-  "completed": "Concluído"
+  "categoryList": {
+    "personal": "Pessoal",
+    "work": "Trabalho",
+    "study": "Estudo",
+    "health": "Saúde",
+    "others": "Outros",
+    "all": "Todos"
+  },
+  "title": "Título",
+  "completed": "Concluído",
+  "completedList": {
+    "true": "Sim",
+    "false": "Não",
+    "all": "Todos"
+  },
+  "addActivity": "+ Atividade",
+  "weekDays": {
+    "monday": "Segunda-feira",
+    "tuesday": "Terça-feira",
+    "wednesday": "Quarta-feira",
+    "thursday": "Quinta-feira",
+    "friday": "Sexta-feira",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  },
+  "card": {
+    "delete": "Excluir",
+    "complete": "Concluir",
+    "addActivity":"Criar Atividade",
+    "category": "Categoria",
+    "date": "Data",
+    "time": "Hora",
+    "title": "Título",
+    "buttons": {
+      "cancel": "Cancelar",
+      "create": "Criar"
+    }
+  }
 }

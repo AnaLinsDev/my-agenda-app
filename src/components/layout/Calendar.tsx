@@ -4,20 +4,22 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 import ActivityCard from "../ActivityCard";
 import { useFilteredActivities } from "../../hooks/useFilteredActivities";
+import { useTranslation } from "react-i18next";
 
 export default function Calendar() {
+  const { t } = useTranslation();
   const activities = useFilteredActivities();
 
   const [weekOffset, setWeekOffset] = useState(0);
 
   const week = [
-    { id: 1, name: "Segunda" },
-    { id: 2, name: "Terça" },
-    { id: 3, name: "Quarta" },
-    { id: 4, name: "Quinta" },
-    { id: 5, name: "Sexta" },
-    { id: 6, name: "Sábado" },
-    { id: 7, name: "Domingo" },
+    { id: 1, name: "weekDays.monday" },
+    { id: 2, name: "weekDays.tuesday" },
+    { id: 3, name: "weekDays.wednesday" },
+    { id: 4, name: "weekDays.thursday" },
+    { id: 5, name: "weekDays.friday" },
+    { id: 6, name: "weekDays.saturday" },
+    { id: 7, name: "weekDays.sunday" },
   ];
 
   const getStartOfWeek = (offset: number) => {
@@ -69,7 +71,7 @@ export default function Calendar() {
         {week.map((w, index) => (
           <div key={w.id} className="bg-card mb-6">
             <h2 className="text-center font-bold p-2">
-              {w.name} - {formatDate(weekDates[index])}
+              {t(w.name)} - {formatDate(weekDates[index])}
             </h2>
 
             <div className="h-[calc(100vh-235px)] overflow-y-scroll">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useActivities } from "../hooks/useActivities";
 import { categoryStyles } from "../utils/category-styles";
 import Button from "./core/Button";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   id: string;
@@ -23,6 +24,7 @@ export default function ActivityCard({
   const { deleteActivity, toggleCompleted, updateActivity, activities } =
     useActivities();
 
+  const { t } = useTranslation();
   const activity = activities.find((a) => a.id === id);
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -121,7 +123,7 @@ export default function ActivityCard({
 
       <div className="flex justify-between">
         <Button
-          title="Delete"
+          title={t("card.delete")}
           variant="danger"
           size="sm"
           onClick={() => deleteActivity(id)}
@@ -129,7 +131,7 @@ export default function ActivityCard({
 
         {!completed && (
           <Button
-            title="Complete"
+            title={t("card.complete")}
             variant="outlined"
             size="sm"
             onClick={() => toggleCompleted(id)}
