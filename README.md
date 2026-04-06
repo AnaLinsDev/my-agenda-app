@@ -24,5 +24,7 @@ With the IndexedDB (idb) the data is persisted locally, enabling scalable client
 The main reason for this app is to practice animations, Tailwind, and Zustand. That is why I did not think it was necessary to develop a backend for it, and why IndexedDB was perfect in this case.
 </p>
 
+<img width="1912" height="928" alt="image" src="https://github.com/user-attachments/assets/2436a4f8-94a3-469d-99f8-992d7934b480" />
+
 
 
