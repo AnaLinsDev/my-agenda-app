@@ -9,18 +9,12 @@
 </p>
 
 
-
-
 ## Stack
 - React – a library for building user interfaces with reusable components.
 - i18n (react-i18next) – a library for handling internationalization and enabling multi-language support.
 - Tailwind CSS – a utility-first CSS framework for rapidly building custom user interfaces.
 - Zustand – a lightweight library for managing global state in a simple and scalable way.
 - IndexedDB (idb) – a library that simplifies using IndexedDB for client-side data persistence.
-- ESLint – a tool for identifying and fixing code quality and style issues.
-- Vitest – a fast testing tool for unit tests in modern frontend applications.
-
-
 
 
 ## Why IndexedDB?
