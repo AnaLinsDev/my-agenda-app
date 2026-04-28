@@ -28,7 +28,7 @@
   "card": {
     "delete": "Excluir",
     "complete": "Concluir",
-    "addActivity":"Criar Atividade",
+    "addActivity": "Criar Atividade",
     "category": "Categoria",
     "date": "Data",
     "time": "Hora",
@@ -37,5 +37,43 @@
       "cancel": "Cancelar",
       "create": "Criar"
     }
+  },
+  "signup": {
+    "titleRegister": "Criar conta",
+    "titleLogin": "Bem-vindo de volta",
+    "subtitleRegister": "Cadastre-se para começar a organizar sua agenda",
+    "subtitleLogin": "Entre para continuar",
+    "email": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "password": "Senha",
+    "passwordPlaceholder": "••••••••",
+    "registerButton": "Criar conta",
+    "loginButton": "Entrar",
+    "loading": "Carregando...",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "noAccount": "Não tem uma conta?",
+    "goToLogin": "Entrar",
+    "goToRegister": "Criar uma conta"
+  },
+  "validation": {
+    "email_required": "Email é obrigatório",
+    "invalid_email": "Email inválido",
+    "password_min": "A senha deve ter pelo menos 6 caracteres",
+    "title_required": "Título é obrigatório",
+    "date_required": "Data é obrigatória",
+    "time_required": "Hora é obrigatória",
+    "category_required": "Categoria é obrigatória"
+  },
+  "errors": {
+    "INVALID_CREDENTIALS": "Email ou senha inválidos",
+    "NOT_AUTHENTICATED": "Você não está autenticado",
+    "INVALID_TOKEN": "Sessão inválida. Faça login novamente",
+    "INVALID_CURRENT_PASSWORD": "Senha atual incorreta",
+    "USER_NOT_FOUND": "Usuário não encontrado",
+    "USER_ALREADY_EXISTS": "Já existe um usuário com este email ou nome de usuário",
+    "EMAIL_ALREADY_EXISTS": "Este email já está em uso",
+    "ACTIVITY_NOT_FOUND": "Atividade não encontrada",
+    "NOT_FOUND": "Recurso não encontrado",
+    "FORBIDDEN": "Você não tem permissão para realizar esta ação"
   }
 }

@@ -3,6 +3,7 @@ import { useActivities } from "../hooks/useActivities";
 import { categoryStyles } from "../utils/category-styles";
 import Button from "./core/Button";
 import { useTranslation } from "react-i18next";
+import { formatDate, parseLocalDate } from "../utils/dates";
 
 type Props = {
   id: string;
@@ -24,7 +25,7 @@ export default function ActivityCard({
   const { deleteActivity, toggleCompleted, updateActivity, activities } =
     useActivities();
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const activity = activities.find((a) => a.id === id);
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -52,7 +53,7 @@ export default function ActivityCard({
 
   return (
     <div
-      className={`my-2 p-3 max-w-240 text-text-h  ${
+      className={`m-2 p-3 max-w-240 text-text-h rounded ${
         categoryStyles[category].bg
       }`}
     >
@@ -96,7 +97,7 @@ export default function ActivityCard({
               className="cursor-pointer text-sm"
               onClick={() => setIsEditingDate(true)}
             >
-              {`${newDate.split("-")[1]}/${newDate.split("-")[2]}`}
+              {formatDate(parseLocalDate(newDate), i18n.language)}
             </p>
           )}
 
