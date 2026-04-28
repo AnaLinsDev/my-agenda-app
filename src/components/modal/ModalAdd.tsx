@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../core/Input";
 import Select from "../core/Select";
 import Button from "../core/Button";
-import { schema, type FormDataModalAdd } from "../../zod/modal-add";
+import { ActivitySchema, type FormDataActivity } from "../../zod/activity";
 import type { Category } from "../../types/Category";
 import { categoryStyles } from "../../utils/category-styles";
 import { useTranslation } from "react-i18next";
@@ -26,8 +26,8 @@ export default function ModalAdd({ onClose, categories }: Props) {
     watch,
     formState: { errors },
     reset,
-  } = useForm<FormDataModalAdd>({
-    resolver: zodResolver(schema),
+  } = useForm<FormDataActivity>({
+    resolver: zodResolver(ActivitySchema),
   });
 
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export default function ModalAdd({ onClose, categories }: Props) {
     selectedCategory &&
     categoryStyles[selectedCategory as keyof typeof categoryStyles];
 
-  const handleCreate = async (data: FormDataModalAdd) => {
+  const handleCreate = async (data: FormDataActivity) => {
     try {
       const payload = {
         ...data,

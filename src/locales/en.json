@@ -57,12 +57,19 @@
   },
   "validation": {
     "email_required": "Email is required",
+    "title_min": "Title must have at least 6 characters",
+    "title_max": "Title must have at most 128 characters",
     "invalid_email": "Invalid email address",
     "password_min": "Password must be at least 6 characters",
     "title_required": "Title is required",
     "date_required": "Date is required",
     "time_required": "Time is required",
     "category_required": "Category is required"
+  },
+  "toast": {
+    "registerSuccess": "Account created successfully",
+    "loginSuccess": "Logged in successfully",
+    "authError": "Something went wrong. Try again."
   },
   "errors": {
     "INVALID_CREDENTIALS": "Invalid email or password",

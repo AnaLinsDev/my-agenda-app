@@ -1,4 +1,6 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
+
 import { categoryStyles } from "../utils/category-styles";
 import Button from "./core/Button";
 import { useTranslation } from "react-i18next";
@@ -6,6 +8,7 @@ import { formatDate, parseLocalDate } from "../utils/dates";
 
 import type { Activity } from "../services/activityService";
 import { useActivitiesStore } from "../store/useActivitiesStore";
+import { ActivitySchemaUpdate } from "../zod/activity";
 
 export default function ActivityCard({
   id,
@@ -27,14 +30,22 @@ export default function ActivityCard({
   const [newDate, setNewDate] = useState(date);
 
   const handleSave = async () => {
+    const result = ActivitySchemaUpdate.safeParse({
+      title: newTitle,
+      date: newDate,
+      time: newTime,
+      category,
+      completed,
+    });
+
+    if (!result.success) {
+      const firstError = result.error.issues[0];
+      toast.error(t(firstError.message)); 
+      return;
+    }
+
     try {
-      await update(id, {
-        title: newTitle,
-        date: newDate,
-        time: newTime,
-        category,
-        completed,
-      });
+      await update(id, result.data);
     } catch (error) {
       console.error("Error updating activity:", error);
     } finally {

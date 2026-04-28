@@ -4,8 +4,9 @@ import { Toaster } from "react-hot-toast";
 
 import Navbar from "./components/layout/Navbar";
 
-import Register from "./pages/auth/SignUpPage";
+import Register from "./pages/SignUpPage";
 import Calendar from "./pages/CalendarPage";
+
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";

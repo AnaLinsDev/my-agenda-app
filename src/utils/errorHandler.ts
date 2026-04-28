@@ -27,9 +27,7 @@ export function handleApiError(error: ApiError) {
 
   // traduz via code
   if (error.code) {
-    
     const translated = i18n.t(`errors.${error.code}`);
-    console.log(`ENTROU: ${translated}`)
     toast.error(
       translated !== `errors.${error.code}`
         ? translated

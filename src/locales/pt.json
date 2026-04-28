@@ -57,12 +57,19 @@
   },
   "validation": {
     "email_required": "Email é obrigatório",
+    "title_min": "O título deve ter pelo menos 6 caracteres",
+    "title_max": "O título deve ter no máximo 128 caracteres",
     "invalid_email": "Email inválido",
     "password_min": "A senha deve ter pelo menos 6 caracteres",
     "title_required": "Título é obrigatório",
     "date_required": "Data é obrigatória",
     "time_required": "Hora é obrigatória",
     "category_required": "Categoria é obrigatória"
+  },
+  "toast": {
+    "registerSuccess": "Conta criada com sucesso",
+    "loginSuccess": "Login realizado com sucesso",
+    "authError": "Algo deu errado. Tente novamente."
   },
   "errors": {
     "INVALID_CREDENTIALS": "Email ou senha inválidos",
