@@ -28,7 +28,7 @@
   "card": {
     "delete": "Delete",
     "complete": "Complete",
-    "addActivity":"Create Activity",
+    "addActivity": "Create Activity",
     "category": "Category",
     "date": "Date",
     "time": "Time",
@@ -82,5 +82,9 @@
     "ACTIVITY_NOT_FOUND": "Activity not found",
     "NOT_FOUND": "Resource not found",
     "FORBIDDEN": "You do not have permission to perform this action"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "goHome": "Go to Home"
   }
 }

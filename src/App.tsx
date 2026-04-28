@@ -11,6 +11,7 @@ import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const checkAuth = useAuthStore((s) => s.checkAuth);
@@ -48,6 +49,8 @@ function App() {
             </PublicOnlyRoute>
           }
         />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
