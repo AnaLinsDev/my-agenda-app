@@ -1,34 +1,27 @@
 import { useState } from "react";
 import { useCategories } from "../hooks/useCategories";
-import { useActivities } from "../hooks/useActivities";
 import { useActivitiesStore } from "../store/useActivitiesStore";
 
 import Button from "./core/Button";
 import Select from "./core/Select";
 import ModalAdd from "./modal/ModalAdd";
 
-import type { FormDataModalAdd } from "../zod/modal-add";
 import { categoryStyles } from "../utils/category-styles";
-
 import { useTranslation } from "react-i18next";
+import type { Activity } from "../types/Activity";
 
 export default function CalendarActions() {
   const { t } = useTranslation();
 
   const { categories } = useCategories();
-  const { addActivity } = useActivities();
-  const setFilters = useActivitiesStore((s) => s.setFilters);
+
+  const { setFilters } = useActivitiesStore();
 
   const [openModal, setOpenModal] = useState(false);
 
-  // ✅ controlled states
+  // controlled UI state
   const [category, setCategory] = useState<string>("all");
   const [completed, setCompleted] = useState<string>("all");
-
-  const handleCreate = async (data: FormDataModalAdd) => {
-    await addActivity(data);
-    setOpenModal(false);
-  };
 
   return (
     <div className="flex flex-col-reverse gap-6 py-0 md:flex-row md:items-end md:justify-between">
@@ -48,15 +41,18 @@ export default function CalendarActions() {
             value={category}
             className={
               category in categoryStyles
-                ? `${categoryStyles[category as keyof typeof categoryStyles].bg} text-text-h`
+                ? `${
+                    categoryStyles[category as keyof typeof categoryStyles].bg
+                  } text-text-h`
                 : ""
             }
             onChange={(e) => {
-              const value = e.target.value;
+              const value = e.target.value as Activity["category"] | "all";
+
               setCategory(value);
 
               setFilters({
-                category: value,
+                category: value === "all" ? undefined : value,
               });
             }}
           />
@@ -71,15 +67,17 @@ export default function CalendarActions() {
             ]}
             value={completed}
             onChange={(e) => {
-              const value = e.target.value;
+              const value = e.target.value as "all" | "true" | "false";
+
               setCompleted(value);
 
               setFilters({
-                completed: value,
+                completed: value === "all" ? undefined : value === "true",
               });
             }}
           />
         </div>
+
         <Button
           title={t("addActivity")}
           variant="ghost"
@@ -87,14 +85,9 @@ export default function CalendarActions() {
         />
       </div>
 
-
       {/* MODAL */}
       {openModal && (
-        <ModalAdd
-          onClose={() => setOpenModal(false)}
-          onSubmit={handleCreate}
-          categories={categories}
-        />
+        <ModalAdd onClose={() => setOpenModal(false)} categories={categories} />
       )}
     </div>
   );

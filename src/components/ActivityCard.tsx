@@ -1,18 +1,11 @@
 import { useState } from "react";
-import { useActivities } from "../hooks/useActivities";
 import { categoryStyles } from "../utils/category-styles";
 import Button from "./core/Button";
 import { useTranslation } from "react-i18next";
 import { formatDate, parseLocalDate } from "../utils/dates";
 
-type Props = {
-  id: string;
-  title: string;
-  date: string;
-  time: string;
-  category: "personal" | "work" | "study" | "health" | "others";
-  completed: boolean;
-};
+import type { Activity } from "../services/activityService";
+import { useActivitiesStore } from "../store/useActivitiesStore";
 
 export default function ActivityCard({
   id,
@@ -21,12 +14,9 @@ export default function ActivityCard({
   time,
   category,
   completed,
-}: Props) {
-  const { deleteActivity, toggleCompleted, updateActivity, activities } =
-    useActivities();
-
+}: Activity) {
   const { t, i18n } = useTranslation();
-  const activity = activities.find((a) => a.id === id);
+  const { update, remove } = useActivitiesStore();
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingTime, setIsEditingTime] = useState(false);
@@ -36,19 +26,44 @@ export default function ActivityCard({
   const [newTime, setNewTime] = useState(time);
   const [newDate, setNewDate] = useState(date);
 
-  const handleSave = () => {
-    if (!activity) return;
+  const handleSave = async () => {
+    try {
+      await update(id, {
+        title: newTitle,
+        date: newDate,
+        time: newTime,
+        category,
+        completed,
+      });
+    } catch (error) {
+      console.error("Error updating activity:", error);
+    } finally {
+      setIsEditingTitle(false);
+      setIsEditingTime(false);
+      setIsEditingDate(false);
+    }
+  };
 
-    updateActivity({
-      ...activity,
-      title: newTitle,
-      time: newTime,
-      date: newDate,
-    });
+  const handleDelete = async () => {
+    try {
+      await remove(id);
+    } catch (error) {
+      console.error("Error deleting activity:", error);
+    }
+  };
 
-    setIsEditingTitle(false);
-    setIsEditingTime(false);
-    setIsEditingDate(false);
+  const handleToggleCompleted = async () => {
+    try {
+      await update(id, {
+        title,
+        date,
+        time,
+        category,
+        completed: !completed,
+      });
+    } catch (error) {
+      console.error("Error toggling activity:", error);
+    }
   };
 
   return (
@@ -85,7 +100,7 @@ export default function ActivityCard({
           {/* DATE */}
           {isEditingDate ? (
             <input
-              className=" border-b outline-none w-fit bg-black"
+              className="border-b outline-none w-fit bg-black"
               type="date"
               value={newDate}
               onChange={(e) => setNewDate(e.target.value)}
@@ -105,8 +120,8 @@ export default function ActivityCard({
           {isEditingTime ? (
             <input
               className="bg-transparent border-b outline-none w-fit"
-              value={newTime}
               type="time"
+              value={newTime}
               onChange={(e) => setNewTime(e.target.value)}
               onBlur={handleSave}
               onKeyDown={(e) => e.key === "Enter" && handleSave()}
@@ -127,7 +142,7 @@ export default function ActivityCard({
           title={t("card.delete")}
           variant="danger"
           size="sm"
-          onClick={() => deleteActivity(id)}
+          onClick={handleDelete}
         />
 
         {!completed && (
@@ -135,7 +150,7 @@ export default function ActivityCard({
             title={t("card.complete")}
             variant="outlined"
             size="sm"
-            onClick={() => toggleCompleted(id)}
+            onClick={handleToggleCompleted}
           />
         )}
       </div>

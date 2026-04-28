@@ -1,18 +1,37 @@
-import { useState } from "react";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { useEffect } from "react";
+import {
+  MdKeyboardArrowRight,
+  MdOutlineKeyboardArrowLeft,
+} from "react-icons/md";
 
 import ActivityCard from "../components/ActivityCard";
-import { useFilteredActivities } from "../hooks/useFilteredActivities";
 import { useTranslation } from "react-i18next";
 import CalendarActions from "../components/CalendarActions";
 import { formatDate, parseLocalDate } from "../utils/dates";
+import { useActivitiesStore } from "../store/useActivitiesStore";
 
 export default function Calendar() {
   const { t, i18n } = useTranslation();
-  const activities = useFilteredActivities();
 
-  const [weekOffset, setWeekOffset] = useState(0);
+  const {
+    activities,
+    weekOffset,
+    setWeekOffset,
+    fetchActivities,
+  } = useActivitiesStore();
+
+  const getStartOfWeek = (offset: number) => {
+    const today = new Date();
+    const day = today.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+
+    const monday = new Date(today);
+    monday.setDate(today.getDate() + diff + offset * 7);
+
+    return monday;
+  };
+
+  const startOfWeek = getStartOfWeek(weekOffset);
 
   const week = [
     { id: 1, name: "weekDays.monday" },
@@ -24,37 +43,26 @@ export default function Calendar() {
     { id: 7, name: "weekDays.sunday" },
   ];
 
-  const getStartOfWeek = (offset: number) => {
-    const today = new Date();
-    const day = today.getDay(); // 0 (Sun) - 6 (Sat)
-
-    const diff = day === 0 ? -6 : 1 - day; // adjust to Monday
-    const monday = new Date(today);
-    monday.setDate(today.getDate() + diff + offset * 7);
-
-    return monday;
-  };
-
-  const startOfWeek = getStartOfWeek(weekOffset);
-
-  // _ -> means you can ignore the current item from the array
   const weekDates = week.map((_, index) => {
     const date = new Date(startOfWeek);
     date.setDate(startOfWeek.getDate() + index);
-
     return date;
   });
+
+  useEffect(() => {
+    fetchActivities();
+  }, [weekOffset]);
 
   return (
     <div className="flex-1 pt-26 px-10">
       <CalendarActions />
 
-      <div className="flex justify-end items-center px-4 ">
-        <button onClick={() => setWeekOffset((prev) => prev - 1)}>
+      <div className="flex justify-end items-center px-4">
+        <button onClick={() => setWeekOffset(weekOffset - 1)}>
           <MdOutlineKeyboardArrowLeft size={36} />
         </button>
 
-        <button onClick={() => setWeekOffset((prev) => prev + 1)}>
+        <button onClick={() => setWeekOffset(weekOffset + 1)}>
           <MdKeyboardArrowRight size={36} />
         </button>
       </div>
@@ -79,15 +87,7 @@ export default function Calendar() {
                   );
                 })
                 .map((a) => (
-                  <ActivityCard
-                    key={a.id}
-                    id={a.id}
-                    title={a.title}
-                    category={a.category}
-                    date={a.date}
-                    time={a.time}
-                    completed={a.completed}
-                  />
+                  <ActivityCard key={a.id} {...a} />
                 ))}
             </div>
           </div>
