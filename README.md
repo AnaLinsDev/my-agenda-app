@@ -4,6 +4,8 @@
   A modern, personal agenda built with React and React Router, designed to deliver a real-world productivity experience. 
   
   The application features an interactive calendar with day and week views, allowing users to create, organize, and manage activities with categories, color-coding, filtering, all enhanced by responsive design, dark/light mode, and subtle animations. 
+
+  The backend repository of this app can be found <a href="https://github.com/AnaLinsDev/my-agenda-api">HERE</a> .
 </p>
 
 <hr />
