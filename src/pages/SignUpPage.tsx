@@ -9,8 +9,8 @@ import Input from "../components/core/Input";
 import Button from "../components/core/Button";
 import { schema, type FormDataAuthRegister } from "../zod/auth";
 import { useAuthStore } from "../store/useAuthStore";
-import ThemeToggle from "../components/ThemeToggle";
 import LanguageToggle from "../components/LanguageToggle";
+import ThemeToggle from "../components/ThemeToggle";
 
 type AuthMode = "login" | "register";
 
@@ -77,101 +77,110 @@ export default function AuthPage() {
         toast.success(t("toast.registerSuccess"));
 
         resetForm();
-        setMode("login"); // switch UI instead of navigating
+        setMode("login");
       } else {
         await loginUser(result.data);
         await checkAuth();
 
         toast.success(t("toast.loginSuccess"));
 
-        navigate("/"); // redirect to app/home
+        navigate("/calendar");
       }
-    } catch (error: unknown) {
-      console.error(error);
-      toast.error(t("toast.authError"));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-bg px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-lg bg-card border border-border rounded-3xl p-8 shadow-custom flex flex-col gap-5"
-      >
-        {/* Header */}
-        <div className="flex flex-col gap-1 text-center">
-          <div className="flex justify-between items-center">
-            <span />
-
-            <h2 className="text-2xl font-semibold text-text-h">
-              {isRegister ? t("signup.titleRegister") : t("signup.titleLogin")}
-            </h2>
-
-            <div className="flex flex-col items-center gap-1">
-              <LanguageToggle />
-              <ThemeToggle />
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full p-4 flex flex-row justify-end">
+        <div>
+          <LanguageToggle />
+          <ThemeToggle />
+        </div>
+      </div>
+      <div className="p-0 flex flex-col items-center -mt-10 w-30 lg:w-50">
+        <img src="/images/logo.png" width={200} alt="logo" />
+      </div>
+      <div className="flex items-center justify-center bg-bg px-4 max-w-lg w-full">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full bg-card border border-border rounded-3xl p-8 shadow-custom flex flex-col gap-5"
+        >
+          {/* Header */}
+          <div className="flex flex-col gap-1 text-center">
+            <div className="flex flex-row justify-center">
+              <h2 className="text-2xl font-semibold text-text-h">
+                {isRegister
+                  ? t("signup.titleRegister")
+                  : t("signup.titleLogin")}
+              </h2>
             </div>
+
+            <p className="text-sm text-text">
+              {isRegister
+                ? t("signup.subtitleRegister")
+                : t("signup.subtitleLogin")}
+            </p>
           </div>
 
-          <p className="text-sm text-text">
-            {isRegister
-              ? t("signup.subtitleRegister")
-              : t("signup.subtitleLogin")}
-          </p>
-        </div>
+          {/* Inputs */}
+          <div className="flex flex-col gap-4">
+            <Input
+              label={t("signup.email")}
+              type="email"
+              placeholder={t("signup.emailPlaceholder")}
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              errorMessage={errors.email && t(errors.email)}
+              variant={errors.email ? "error" : "default"}
+            />
 
-        {/* Inputs */}
-        <div className="flex flex-col gap-4">
-          <Input
-            label={t("signup.email")}
-            type="email"
-            placeholder={t("signup.emailPlaceholder")}
-            value={formData.email}
-            onChange={(e) => handleChange("email", e.target.value)}
-            errorMessage={errors.email && t(errors.email)}
-            variant={errors.email ? "error" : "default"}
+            <Input
+              label={t("signup.password")}
+              type="password"
+              placeholder={t("signup.passwordPlaceholder")}
+              value={formData.password}
+              onChange={(e) => handleChange("password", e.target.value)}
+              errorMessage={errors.password && t(errors.password)}
+              variant={errors.password ? "error" : "default"}
+            />
+          </div>
+
+          {/* Submit */}
+          <Button
+            type="submit"
+            title={
+              loading
+                ? t("signup.loading")
+                : isRegister
+                  ? t("signup.registerButton")
+                  : t("signup.loginButton")
+            }
+            className="w-40 mx-auto"
+            size="lg"
+            disabled={loading}
           />
 
-          <Input
-            label={t("signup.password")}
-            type="password"
-            placeholder={t("signup.passwordPlaceholder")}
-            value={formData.password}
-            onChange={(e) => handleChange("password", e.target.value)}
-            errorMessage={errors.password && t(errors.password)}
-            variant={errors.password ? "error" : "default"}
-          />
-        </div>
+          <div className="flex flex-row justify-center gap-2">
+            {/* Divider */}
+            <div className="text-center text-sm text-text">
+              {isRegister
+                ? t("signup.alreadyHaveAccount")
+                : t("signup.noAccount")}
+            </div>
 
-        {/* Submit */}
-        <Button
-          type="submit"
-          title={
-            loading
-              ? t("signup.loading")
-              : isRegister
-                ? t("signup.registerButton")
-                : t("signup.loginButton")
-          }
-          disabled={loading}
-        />
-
-        {/* Divider */}
-        <div className="text-center text-sm text-text">
-          {isRegister ? t("signup.alreadyHaveAccount") : t("signup.noAccount")}
-        </div>
-
-        {/* Toggle */}
-        <button
-          type="button"
-          onClick={toggleMode}
-          className="text-sm font-medium text-accent hover:underline"
-        >
-          {isRegister ? t("signup.goToLogin") : t("signup.goToRegister")}
-        </button>
-      </form>
+            {/* Toggle */}
+            <button
+              type="button"
+              onClick={toggleMode}
+              className="text-sm font-medium text-accent hover:underline"
+            >
+              {isRegister ? t("signup.goToLogin") : t("signup.goToRegister")}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
