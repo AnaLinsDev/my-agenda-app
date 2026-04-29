@@ -1,9 +1,9 @@
 # MyAgenda App
 
 <p>
-  A modern, offline-first personal agenda built with React and React Router, designed to deliver a real-world productivity experience without relying on a backend or authentication system. 
+  A modern, personal agenda built with React and React Router, designed to deliver a real-world productivity experience. 
   
-  The application features an interactive calendar with day and week views, allowing users to create, organize, and manage activities with categories, color-coding, filtering, and drag-and-drop rescheduling, all enhanced by responsive design, dark/light mode, and subtle animations. 
+  The application features an interactive calendar with day and week views, allowing users to create, organize, and manage activities with categories, color-coding, filtering, all enhanced by responsive design, dark/light mode, and subtle animations. 
 </p>
 
 <hr />
@@ -13,12 +13,13 @@
 - i18n 
 - Tailwind CSS 
 - Zustand 
-- IndexedDB (idb)
+- Fetch with cookies
 
 <hr />
 
 ## Features
-- List weekly tasks
+- Auth - Sign in, sign up and logout user using cookies
+- List user weekly tasks
 - Navigate between weeks (previous and next)
 - Filter tasks by status and category
 - Create new tasks
@@ -32,17 +33,29 @@
 
 ## How to Run the Project
 
+
+### Clone the repository
 ```bash
-# Clone the repository
 git clone https://github.com/AnaLinsDev/my-agenda-app.git
+```
 
-# Navigate into the project folder
+### Navigate into the project folder
+```bash
 cd my-agenda-app
+```
 
-# Install dependencies
+### Create .env file in the root
+```bash
+VITE_API_URL=http://localhost:8000
+```
+
+### Install dependencies
+```bash
 npm install
+```
 
-# Start the development server
+### Start the development server
+```bash
 npm run dev
 ```
 
