@@ -28,7 +28,7 @@
   "card": {
     "delete": "Delete",
     "complete": "Complete",
-    "addActivity":"Create Activity",
+    "addActivity": "Create Activity",
     "category": "Category",
     "date": "Date",
     "time": "Time",
@@ -37,5 +37,54 @@
       "cancel": "Cancel",
       "create": "Create"
     }
+  },
+  "signup": {
+    "titleRegister": "Create account",
+    "titleLogin": "Welcome back",
+    "subtitleRegister": "Sign up to start managing your schedule",
+    "subtitleLogin": "Login to continue",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "registerButton": "Create account",
+    "loginButton": "Login",
+    "loading": "Loading...",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "goToLogin": "Sign in instead",
+    "goToRegister": "Create an account"
+  },
+  "validation": {
+    "email_required": "Email is required",
+    "title_min": "Title must have at least 6 characters",
+    "title_max": "Title must have at most 128 characters",
+    "invalid_email": "Invalid email address",
+    "password_min": "Password must be at least 6 characters",
+    "title_required": "Title is required",
+    "date_required": "Date is required",
+    "time_required": "Time is required",
+    "category_required": "Category is required"
+  },
+  "toast": {
+    "registerSuccess": "Account created successfully",
+    "loginSuccess": "Logged in successfully",
+    "authError": "Something went wrong. Try again."
+  },
+  "errors": {
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "NOT_AUTHENTICATED": "You are not authenticated",
+    "INVALID_TOKEN": "Your session is invalid. Please login again",
+    "INVALID_CURRENT_PASSWORD": "Current password is incorrect",
+    "USER_NOT_FOUND": "User not found",
+    "USER_ALREADY_EXISTS": "A user with this email or username already exists",
+    "EMAIL_ALREADY_EXISTS": "Email is already in use",
+    "ACTIVITY_NOT_FOUND": "Activity not found",
+    "NOT_FOUND": "Resource not found",
+    "FORBIDDEN": "You do not have permission to perform this action"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "goHome": "Go to Home"
   }
 }

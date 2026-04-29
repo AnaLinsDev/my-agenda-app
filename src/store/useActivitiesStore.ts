@@ -1,93 +1,79 @@
 import { create } from "zustand";
-import type { Activity } from "../types/Activity";
-import { startOfWeek, endOfWeek, format } from "date-fns";
+import {
+  getActivities,
+  createActivity,
+  updateActivity,
+  deleteActivity,
+  type Activity,
+  type ActivityCreatePayload,
+  type ActivityUpdatePayload,
+} from "../services/activityService";
 
 type Filters = {
-  category?: string;
-  completed?: string;
-
-  startDate?: string; // YYYY-MM-DD
-  endDate?: string; // YYYY-MM-DD
+  category?: Activity["category"];
+  completed?: boolean;
 };
 
-type State = {
+type Store = {
   activities: Activity[];
+  weekOffset: number;
   filters: Filters;
+
+  setWeekOffset: (offset: number) => void;
+  setFilters: (filters: Filters) => void;
+
+  fetchActivities: () => Promise<void>;
+  create: (data: ActivityCreatePayload) => Promise<void>;
+  update: (id: string, data: ActivityUpdatePayload) => Promise<void>;
+  remove: (id: string) => Promise<void>;
 };
 
-type Actions = {
-  setActivities: (activities: Activity[]) => void;
-  setFilters: (filters: Partial<Filters>) => void;
-  resetFilters: () => void;
+const getStartOfWeek = (offset: number) => {
+  const today = new Date();
+  const day = today.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
 
-  setDayFilter: (date: Date) => void;
-  setWeekFilter: (date: Date) => void;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + diff + offset * 7);
 
-  addActivity: (activity: Activity) => void;
-  updateActivity: (activity: Activity) => void;
-  deleteActivity: (id: string) => void;
-  toggleCompleted: (id: string) => void;
+  return monday.toISOString().split("T")[0];
 };
 
-export const useActivitiesStore = create<State & Actions>((set) => ({
+export const useActivitiesStore = create<Store>((set, get) => ({
   activities: [],
+  weekOffset: 0,
   filters: {},
 
-  setActivities: (activities) => set({ activities }),
+  setWeekOffset: (offset) => set({ weekOffset: offset }),
 
-  setFilters: (newFilters) =>
+  setFilters: (filters) => {
     set((state) => ({
-      filters: { ...state.filters, ...newFilters },
-    })),
+      filters: { ...state.filters, ...filters },
+    }));
 
-  resetFilters: () => set({ filters: {} }),
-
-  //  DAY
-  setDayFilter: (date) => {
-    const formatted = format(date, "yyyy-MM-dd");
-
-    set({
-      filters: {
-        startDate: formatted,
-        endDate: formatted,
-      },
-    });
+    get().fetchActivities();
   },
 
-  // WEEK
-  setWeekFilter: (date) => {
-    const start = format(startOfWeek(date, { weekStartsOn: 1 }), "yyyy-MM-dd");
-    const end = format(endOfWeek(date, { weekStartsOn: 1 }), "yyyy-MM-dd");
+  fetchActivities: async () => {
+    const { weekOffset, filters } = get();
+    const weekStart = getStartOfWeek(weekOffset);
 
-    set({
-      filters: {
-        startDate: start,
-        endDate: end,
-      },
-    });
+    const data = await getActivities(weekStart, filters);
+    set({ activities: data });
   },
 
-  addActivity: (activity) =>
-    set((state) => ({
-      activities: [...state.activities, activity],
-    })),
+  create: async (data) => {
+    await createActivity(data);
+    await get().fetchActivities();
+  },
 
-  updateActivity: (activity) =>
-    set((state) => ({
-      activities: state.activities.map((a) =>
-        a.id === activity.id ? activity : a,
-      ),
-    })),
+  update: async (id, data) => {
+    await updateActivity(id, data);
+    await get().fetchActivities();
+  },
 
-  deleteActivity: (id) =>
-    set((state) => ({
-      activities: state.activities.filter((a) => a.id !== id),
-    })),
-
-  toggleCompleted: (id) =>
-    set((state) => ({
-      activities: state.activities.map((a) =>
-        a.id === id ? { ...a, completed: !a.completed } : a,
-      ),
-    })),
+  remove: async (id) => {
+    await deleteActivity(id);
+    await get().fetchActivities();
+  },
 }));

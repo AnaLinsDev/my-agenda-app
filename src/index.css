@@ -3,15 +3,15 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #ededed;
+  --bg: #e3e3e3;
   --border: #e5e4e7;
-  --code-bg: #f4f3ec;
+  --navbar: #ead7ff;
   --accent: #aa3bff;
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
 
-  --card: #f3f3f3;
+  --card: #cecece;
   --error: #ef4444;
   --dark: #2a2a2a;
 
@@ -51,7 +51,7 @@
   --text-h: #f3f4f6;
   --bg: #212121;
   --border: #2e303a;
-  --code-bg: #1f2028;
+  --navbar: #16001c;
   --accent: #c084fc;
   --accent-bg: rgba(192, 132, 252, 0.15);
   --accent-border: rgba(192, 132, 252, 0.5);
@@ -59,12 +59,12 @@
 
   --whitesmoke: whitesmoke;
   --card: #1c1c1c;
-  --error: #932d2d;
+  --error: #b22f2f;
 
   --personal: #3b82f6;
   --work: #df8d00;
   --study: #10b981;
-  --health: #ef4444;
+  --health: #eb0000;
   --others: #6b7280;
 
   --shadow:
@@ -80,7 +80,7 @@
   --color-text-h: var(--text-h);
   --color-bg: var(--bg);
   --color-border: var(--border);
-  --color-code-bg: var(--code-bg);
+  --color-navbar: var(--navbar);
 
   --color-accent: var(--accent);
   --color-accent-bg: var(--accent-bg);
