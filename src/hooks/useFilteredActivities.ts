@@ -10,16 +10,15 @@ export const useFilteredActivities = () => {
       .filter((curr) => {
         if (
           filters.category &&
-          filters.category !== "all" &&
+          filters.category !== undefined &&
           curr.category !== filters.category
         ) {
           return false;
         }
 
         if (
-          filters.completed &&
-          filters.completed !== "all" &&
-          `${curr.completed}` !== filters.completed
+          filters.completed !== undefined &&
+          curr.completed !== filters.completed
         ) {
           return false;
         }
