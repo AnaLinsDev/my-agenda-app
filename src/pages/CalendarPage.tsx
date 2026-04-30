@@ -54,11 +54,17 @@ export default function Calendar() {
       <CalendarActions />
 
       <div className="flex justify-end items-center px-4">
-        <button onClick={() => setWeekOffset(weekOffset - 1)}>
+        <button
+          className="rounded bg-transparent text-text-h hover:bg-accent-bg"
+          onClick={() => setWeekOffset(weekOffset - 1)}
+        >
           <MdOutlineKeyboardArrowLeft size={36} />
         </button>
 
-        <button onClick={() => setWeekOffset(weekOffset + 1)}>
+        <button
+          className="rounded bg-transparent text-text-h hover:bg-accent-bg"
+          onClick={() => setWeekOffset(weekOffset + 1)}
+        >
           <MdKeyboardArrowRight size={36} />
         </button>
       </div>

@@ -15,7 +15,7 @@ export default function CalendarActions() {
 
   const { categories } = useCategories();
 
-  const { setFilters } = useActivitiesStore();
+  const { loading, setFilters } = useActivitiesStore();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -84,6 +84,15 @@ export default function CalendarActions() {
           onClick={() => setOpenModal(true)}
         />
       </div>
+      {loading && (
+        <div className="flex items-center justify-center h-full gap-3 my-auto">
+          <div className="w-6 h-6 border-4 border-card border-t-accent rounded-full animate-spin" />
+
+          <h1 className="font-semibold text-sm text-muted-foreground">
+            {t("loading.updatingData")}
+          </h1>
+        </div>
+      )}
 
       {/* MODAL */}
       {openModal && (

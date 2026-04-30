@@ -88,6 +88,7 @@
     "goHome": "Go to Home"
   },
   "loading": {
+    "updatingData": "Updating data",
     "coldStartMessage_p1": "Waking up the server…",
     "coldStartMessage_p2": "This can take a minute on first visit."
   }

@@ -18,6 +18,7 @@ type Store = {
   activities: Activity[];
   weekOffset: number;
   filters: Filters;
+  loading: boolean;
 
   setWeekOffset: (offset: number) => void;
   setFilters: (filters: Filters) => void;
@@ -43,6 +44,7 @@ export const useActivitiesStore = create<Store>((set, get) => ({
   activities: [],
   weekOffset: 0,
   filters: {},
+  loading: false,
 
   setWeekOffset: (offset) => set({ weekOffset: offset }),
 
@@ -55,25 +57,49 @@ export const useActivitiesStore = create<Store>((set, get) => ({
   },
 
   fetchActivities: async () => {
-    const { weekOffset, filters } = get();
-    const weekStart = getStartOfWeek(weekOffset);
+    set({ loading: true });
 
-    const data = await getActivities(weekStart, filters);
-    set({ activities: data });
+    try {
+      const { weekOffset, filters } = get();
+      const weekStart = getStartOfWeek(weekOffset);
+
+      const data = await getActivities(weekStart, filters);
+      set({ activities: data });
+    } finally {
+      set({ loading: false });
+    }
   },
 
   create: async (data) => {
-    await createActivity(data);
-    await get().fetchActivities();
+    set({ loading: true });
+
+    try {
+      await createActivity(data);
+      await get().fetchActivities();
+    } finally {
+      set({ loading: false });
+    }
   },
 
   update: async (id, data) => {
-    await updateActivity(id, data);
-    await get().fetchActivities();
+    set({ loading: true });
+
+    try {
+      await updateActivity(id, data);
+      await get().fetchActivities();
+    } finally {
+      set({ loading: false });
+    }
   },
 
   remove: async (id) => {
-    await deleteActivity(id);
-    await get().fetchActivities();
+    set({ loading: true });
+
+    try {
+      await deleteActivity(id);
+      await get().fetchActivities();
+    } finally {
+      set({ loading: false });
+    }
   },
 }));
