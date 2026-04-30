@@ -43,7 +43,7 @@ export default function Input({
         )}
         {...props}
       />
-      <p className="text-red-500">{errorMessage}</p>
+      <p className="text-error">{errorMessage}</p>
     </div>
   );
 }

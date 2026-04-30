@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 import NotFound from "./pages/NotFound";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   const checkAuth = useAuthStore((s) => s.checkAuth);
@@ -22,9 +23,7 @@ function App() {
     checkAuth();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <LoadingPage />;
 
   return (
     <div>

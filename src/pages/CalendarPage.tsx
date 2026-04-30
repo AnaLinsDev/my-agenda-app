@@ -13,12 +13,8 @@ import { useActivitiesStore } from "../store/useActivitiesStore";
 export default function Calendar() {
   const { t, i18n } = useTranslation();
 
-  const {
-    activities,
-    weekOffset,
-    setWeekOffset,
-    fetchActivities,
-  } = useActivitiesStore();
+  const { activities, weekOffset, setWeekOffset, fetchActivities } =
+    useActivitiesStore();
 
   const getStartOfWeek = (offset: number) => {
     const today = new Date();
@@ -67,14 +63,14 @@ export default function Calendar() {
         </button>
       </div>
 
-      <div className="grid lg:grid-cols-4 2xl:grid-cols-7">
+      <div className="grid sm:grid-cols-4 2xl:grid-cols-7">
         {week.map((w, index) => (
           <div key={w.id} className="mb-6">
             <h2 className="text-center font-bold p-2">
               {t(w.name)} - {formatDate(weekDates[index], i18n.language)}
             </h2>
 
-            <div className="h-[calc(100vh-235px)] bg-card overflow-y-scroll">
+            <div className="h-[calc(100vh-295px)] max-h-160 bg-card overflow-y-scroll">
               {activities
                 .filter((a) => {
                   const activityDate = parseLocalDate(a.date);

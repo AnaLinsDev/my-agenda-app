@@ -3,14 +3,16 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #e3e3e3;
+  --bg: #eaeaea;
   --border: #e5e4e7;
   --navbar: #ead7ff;
   --accent: #aa3bff;
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-
+  --whitesmoke: whitesmoke;
+  
+  --card-login: #f9eeff;
   --card: #cecece;
   --error: #ef4444;
   --dark: #2a2a2a;
@@ -57,7 +59,7 @@
   --accent-border: rgba(192, 132, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
 
-  --whitesmoke: whitesmoke;
+  --card-login: #1c1c1c;
   --card: #1c1c1c;
   --error: #b22f2f;
 

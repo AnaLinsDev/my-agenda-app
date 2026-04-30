@@ -86,5 +86,9 @@
   "notFound": {
     "title": "Page not found",
     "goHome": "Go to Home"
+  },
+  "loading": {
+    "coldStartMessage_p1": "Waking up the server…",
+    "coldStartMessage_p2": "This can take a minute on first visit."
   }
 }

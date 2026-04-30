@@ -38,7 +38,7 @@ export default function Select({
   ...props
 }: Props) {
   return (
-    <div className="flex flex-col gap-1 min-w-50">
+    <div className="flex flex-col gap-1">
       <label className="text-sm">{label}</label>
 
       <select
