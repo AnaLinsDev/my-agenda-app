@@ -120,7 +120,7 @@ export default function ActivityCard({
               {/* MENU BUTTON */}
               <button
                 onClick={() => setIsMenuOpen((prev) => !prev)}
-                className="p-2 rounded hover:bg-black/10 transition"
+                className="p-2 rounded hover:bg-black/10 transition cursor-pointer"
               >
                 <MoreVertical size={18} />
               </button>
@@ -128,7 +128,7 @@ export default function ActivityCard({
               {/* MENU */}
               <div
                 className={`absolute right-2 top-10 w-44 bg-card border rounded shadow-lg z-10
-                transition-all duration-150 ${
+                transition-all duration-150 cursor-pointer ${
                   isMenuOpen
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-95 pointer-events-none"
@@ -136,7 +136,7 @@ export default function ActivityCard({
               >
                 <div className="py-1">
                   <button
-                    className="w-full text-left px-3 py-2 hover:bg-black/50 text-sm transition"
+                    className="w-full text-left px-3 py-2 cursor-pointer hover:bg-black/50 text-sm transition"
                     onClick={() => {
                       handleToggleCompleted();
                       setIsMenuOpen(false);
@@ -148,7 +148,7 @@ export default function ActivityCard({
                   <div className="border-t my-1 opacity-20" />
 
                   <button
-                    className="w-full text-left px-3 py-2 hover:bg-black/10 text-sm text-red-500 transition"
+                    className="w-full text-left px-3 py-2 cursor-pointer hover:bg-black/10 text-sm text-red-500 transition"
                     onClick={() => {
                       handleDelete();
                       setIsMenuOpen(false);

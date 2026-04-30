@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { logoutUser } from "../../services/authService";
 import { useAuthStore } from "../../store/useAuthStore";
 import LanguageToggle from "../LanguageToggle";
@@ -20,7 +21,9 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <img src="/images/logo.png" width={40} alt="logo" />
           <span className="font-semibold text-lg hidden sm:block">
-            MyAgenda
+            <Link to="/calendar">
+              MyAgenda
+            </Link>
           </span>
         </div>
 
@@ -32,7 +35,6 @@ export default function Navbar() {
           {/* USER SECTION */}
           {user && (
             <div className="flex items-center gap-3 ml-2 border-l border-border pl-3">
-
               {/* Name (hidden on small screens) */}
               <div className="hidden md:flex flex-col leading-tight">
                 <span className="text-sm font-medium">{user.email}</span>
