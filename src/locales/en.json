@@ -27,7 +27,8 @@
   },
   "card": {
     "delete": "Delete",
-    "complete": "Complete",
+    "redo": "Mark as incomplete",
+    "complete": "Mark as complete",
     "addActivity": "Create Activity",
     "category": "Category",
     "date": "Date",

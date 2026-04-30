@@ -27,7 +27,8 @@
   },
   "card": {
     "delete": "Excluir",
-    "complete": "Concluir",
+    "redo": "Marcar como incompleta",
+    "complete": "Marcar como concluída",
     "addActivity": "Criar Atividade",
     "category": "Categoria",
     "date": "Data",
