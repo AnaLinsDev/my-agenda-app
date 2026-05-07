@@ -63,7 +63,24 @@ npm run dev
 
 <hr />
 
-<img width="1912" height="928" alt="image" src="https://github.com/user-attachments/assets/2436a4f8-94a3-469d-99f8-992d7934b480" />
+<p align="center">
+  <video 
+    src="https://github.com/user-attachments/assets/4049d766-3f4b-420e-8c96-7397c27a0528"
+    controls
+    autoplay
+    muted
+    loop
+    playsinline
+    width="700"
+    poster="https://github.com/user-attachments/assets/2436a4f8-94a3-469d-99f8-992d7934b480"
+  >
+    <img 
+      src="https://github.com/user-attachments/assets/2436a4f8-94a3-469d-99f8-992d7934b480"
+      alt="Demo preview"
+      width="700"
+    />
+  </video>
+</p>
 
 
 
