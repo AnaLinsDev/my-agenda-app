@@ -22,6 +22,7 @@ export async function loginUser(data: RegisterPayload) {
     method: "POST",
     body: JSON.stringify(data),
     credentials: "include",
+    skipGlobalErrorHandler: true,
   });
 }
 

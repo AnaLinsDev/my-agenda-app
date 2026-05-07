@@ -11,6 +11,7 @@ import { schema, type FormDataAuthRegister } from "../zod/auth";
 import { useAuthStore } from "../store/useAuthStore";
 import LanguageToggle from "../components/LanguageToggle";
 import ThemeToggle from "../components/ThemeToggle";
+import { type ApiError } from "../utils/errorHandler";
 
 type AuthMode = "login" | "register";
 
@@ -79,12 +80,24 @@ export default function AuthPage() {
         resetForm();
         setMode("login");
       } else {
-        await loginUser(result.data);
-        await checkAuth();
+        try {
+          await loginUser(result.data);
 
-        toast.success(t("toast.loginSuccess"));
+          await checkAuth();
 
-        navigate("/calendar");
+          toast.success(t("toast.loginSuccess"));
+
+          navigate("/calendar");
+        } catch (error) {
+          const apiError = error as ApiError;
+
+          if (apiError.status === 401) {
+            toast.error(t(`errors.${apiError.code}`));
+            return;
+          }
+
+          toast.error(apiError.message);
+        }
       }
     } finally {
       setLoading(false);

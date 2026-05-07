@@ -9,9 +9,13 @@ type ApiError = {
   status: number;
 };
 
+type FetchOptions = RequestInit & {
+  skipGlobalErrorHandler?: boolean;
+};
+
 export async function apiFetch<T>(
   endpoint: string,
-  options: RequestInit = {},
+  options: FetchOptions = {},
 ): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     headers: {
@@ -29,7 +33,6 @@ export async function apiFetch<T>(
   } catch {
     // resposta vazia
   }
-
   if (!response.ok) {
     const parsed = extractError(data);
 
@@ -39,7 +42,9 @@ export async function apiFetch<T>(
       status: response.status,
     };
 
-    handleApiError(error);
+    if (!options?.skipGlobalErrorHandler) {
+      handleApiError(error);
+    }
 
     throw error;
   }
